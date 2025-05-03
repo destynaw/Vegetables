@@ -11,21 +11,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vegetables', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('stock')->default(0);
-            $table->decimal('price', 8, 2);
-            $table->timestamps();
+        Schema::table('vegetables', function (Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('supplier_id')->nullable()->constrained()->onDelete('set null');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('vegetables');
+        Schema::table('vegetables', function (Blueprint $table) {
+            //
+        });
     }
 };
